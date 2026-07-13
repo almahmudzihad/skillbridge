@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Providers } from "@/context";
 import "./globals.css";
 import Navbar from "@/components/layout/navbar/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Providers } from "@/context";
+import { Toaster } from "react-hot-toast";
 
 
 export const metadata: Metadata = {
@@ -22,7 +23,12 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
-          </Providers>
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+          />
+
+        </Providers>
       </body>
     </html>
   );
