@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   User,
 } from "firebase/auth";
@@ -14,22 +15,18 @@ import {
   useState,
 } from "react";
 
-import { auth } from "@/firebase/firebase.config";
-import {
-  AuthContext,
-} from "@/context/AuthContext";
+import { auth, googleProvider } from "@/firebase/firebase.config";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function AuthProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [user, setUser] =
-    useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const [loading, setLoading] =
-    useState(true);
-
+  // Register
   const createUser = (
     email: string,
     password: string
@@ -41,6 +38,7 @@ export default function AuthProvider({
     );
   };
 
+  // Login
   const loginUser = (
     email: string,
     password: string
@@ -52,16 +50,25 @@ export default function AuthProvider({
     );
   };
 
+  // Google Login
+  const googleLogin = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  // Logout
   const logoutUser = () => {
     return signOut(auth);
   };
 
+  // Current User
   useEffect(() => {
-    const unsubscribe =
-      onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (currentUser) => {
         setUser(currentUser);
         setLoading(false);
-      });
+      }
+    );
 
     return () => unsubscribe();
   }, []);
@@ -71,6 +78,7 @@ export default function AuthProvider({
     loading,
     createUser,
     loginUser,
+    googleLogin,
     logoutUser,
   };
 

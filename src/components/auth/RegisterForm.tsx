@@ -8,9 +8,10 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { updateProfile } from "firebase/auth";
 import { auth } from "@/firebase/firebase.config";
+import { FcGoogle } from "react-icons/fc";
 
 export default function RegisterForm() {
-    const { createUser } = useAuth();
+    const { createUser, googleLogin } = useAuth();
     const router = useRouter();
     const {
         register,
@@ -38,6 +39,18 @@ export default function RegisterForm() {
     } catch (error: any) {
         toast.error(error.message);
     }
+    };
+    const handleGoogleLogin = async () => {
+      try {
+        await googleLogin();
+
+        toast.success("Registration Successful!");
+
+        router.push("/");
+      } catch (error) {
+        console.error(error);
+        toast.error("Google Sign Up Failed");
+      }
     };
   return (
     <div className="card w-full max-w-md bg-base-100 shadow-2xl">
@@ -139,6 +152,16 @@ export default function RegisterForm() {
             </button>
 
         </form>
+        <div className="divider">OR</div>
+
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="btn btn-outline w-full"
+          >
+            <FcGoogle size={22} />
+            Continue with Google
+          </button>
 
         <p className="text-center mt-5">
 

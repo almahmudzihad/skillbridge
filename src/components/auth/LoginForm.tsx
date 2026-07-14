@@ -8,9 +8,10 @@ import toast from "react-hot-toast";
 
 import useAuth from "@/hooks/useAuth";
 import { loginSchema, LoginFormData } from "@/lib/loginSchema";
+import { FcGoogle } from "react-icons/fc";
 
 export default function LoginForm() {
-  const { loginUser } = useAuth();
+  const { loginUser, googleLogin } = useAuth();
   const router = useRouter();
 
   const {
@@ -34,10 +35,19 @@ export default function LoginForm() {
     }
   };
 
-  const handleDemoLogin = () => {
-    setValue("email", "demo@gmail.com");
-    setValue("password", "123456");
-  };
+  
+  const handleGoogleLogin = async () => {
+  try {
+    await googleLogin();
+
+    toast.success("Google Login Successful!");
+
+    router.push("/");
+  } catch (error) {
+    console.error(error);
+    toast.error("Google Login Failed");
+  }
+};
 
   return (
     <div className="card w-full max-w-md bg-base-100 shadow-2xl">
@@ -109,13 +119,18 @@ export default function LoginForm() {
             {isSubmitting ? "Logging in..." : "Login"}
           </button>
         </form>
+        <div className="divider">OR</div>
 
-        <button
-          onClick={handleDemoLogin}
-          className="btn btn-outline btn-secondary mt-3 w-full"
-        >
-          Demo Login
-        </button>
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="btn btn-outline w-full"
+          >
+            <FcGoogle size={22} />
+            Continue with Google
+          </button>
+
+        
 
         <p className="mt-6 text-center">
           Don't have an account?
