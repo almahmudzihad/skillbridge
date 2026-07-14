@@ -12,7 +12,7 @@ DevLaunch is a modern online learning platform built with **Next.js 15**, **Reac
 
 ## 📂 GitHub Repository
 
-🔗 https://github.com/almahmudzihad/skillbridge
+🔗 https://github.com/almahmudzihad/devlaunch
 
 ---
 
@@ -102,7 +102,7 @@ src/
 Clone the repository
 
 ```bash
-git clone https://github.com/almahmudzihad/skillbridge.git
+git clone https://github.com/almahmudzihad/devlaunch.git
 ```
 
 Navigate into the project

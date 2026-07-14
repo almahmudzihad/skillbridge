@@ -5,8 +5,8 @@ export const courseSchema = z.object({
   category: z.string().min(1),
   instructor: z.string().min(2),
   duration: z.string().min(2),
-  price: z.coerce.number().positive(),
-  rating: z.coerce.number().min(1).max(5),
+  price: z.number().positive(),
+  rating: z.number().min(1).max(5),
   image: z.url(),
   description: z.string().min(20),
 });

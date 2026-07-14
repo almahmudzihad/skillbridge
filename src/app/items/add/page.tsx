@@ -174,7 +174,9 @@ export default function AddCoursePage() {
                   </label>
 
                   <input
-                    {...register("price")}
+                    {...register("price", {
+                      valueAsNumber: true,
+                    })}
                     type="number"
                     className="input input-bordered w-full"
                   />
@@ -198,7 +200,9 @@ export default function AddCoursePage() {
                   </label>
 
                   <input
-                    {...register("rating")}
+                    {...register("rating", {
+                      valueAsNumber: true,
+                    })}
                     type="number"
                     step="0.1"
                     className="input input-bordered w-full"

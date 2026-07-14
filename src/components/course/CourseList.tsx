@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { getCourses } from "@/lib/courseStorage";
 import CourseCard from "./CourseCard";
+import { Course } from "@/data/courses";
 
 export default function CourseList() {
   const [search, setSearch] = useState("");
