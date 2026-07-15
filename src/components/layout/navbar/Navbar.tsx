@@ -55,6 +55,13 @@ export default function Navbar() {
             </li>
           </>
         )}
+        {user && (
+        <li>
+          <Link href="/profile">
+            Profile
+          </Link>
+        </li>
+      )}
     </>
   );
 
